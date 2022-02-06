@@ -1,0 +1,133 @@
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-4">
+                <ng-container *ngIf="user && (user.role.roleName.toLowerCase() ==='admin' || user.role.roleName.toLowerCase() === 'creator')">
+                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModalLong" (click)="addArticle()">Add New</button>
+                </ng-container>
+            </div>
+            <div class="col-4">
+                <select class="form-control" (change)="getArticleByTag($event)">
+                    <option value="0">Get All Articles</option>
+                    <option value={{tag.id}} *ngFor="let tag of articleTags">{{tag.tag}}</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let article of articles | paginate: { itemsPerPage: 6, currentPage: page }">
+                <div class="card card-custom gutter-b example example-compact">
+                    <div class="card-header">
+                        <h3 class="card-title">Writter :&nbsp; <span class="text-success"> {{article.writterName}}</span></h3>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row flex-center">
+                            <div class="col-6">
+                                <b>{{article.title}}</b>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-right text-primary">#{{article.articleTag}}</h6>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="paragraphs">{{article.content}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-md btn-primary mr-5" (click)='viewArticle(article)'>View</button>
+                        <ng-container *ngIf="user && user.userId === article.userId && (user.role.roleName.toLowerCase() ==='admin' || user.role.roleName.toLowerCase() === 'creator')">
+                            <button class="btn btn-md btn-warning mr-5" (click)="editArticle(article)" data-toggle="modal" data-target="#exampleModalLong">Edit</button>
+                            <button class="btn btn-md btn-danger" (click)="openDialogdeleteArticle(article)" data-toggle="modal" data-target="#confrimDialog">Delete</button>
+                        </ng-container>  
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+    <!--end::Container-->
+</div>
+
+<ng-container>
+     <div class="modal fade" id="exampleModalLong"  tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true"> <!--data-backdrop="static" -->
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{isEdit? 'Edit' : 'Add'}} Article</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <form class="form" [formGroup]='form' >
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="font-size-h6 font-weight-bolder text-dark">Title</label>
+                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" formControlName="title" autocomplete="off" />
+                                <small class="text-danger" *ngIf="submitted && form.get('title').hasError('required')">Email required</small>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label class="font-size-h6 font-weight-bolder text-dark">Article Category</label>
+                                <select class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" formControlName="articleCatId" id="">
+                                    <option value="">Select Category</option>
+                                    <option *ngFor="let tag of articleTags" value={{tag.id}}>{{tag.tag}}</option>
+                                </select>
+                                <small class="text-danger" *ngIf="submitted && form.get('articleCatId').hasError('required')">Category required</small>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label class="font-size-h6 font-weight-bolder text-dark">Content</label>
+                                <textarea class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" rows="3" formControlName="content" autocomplete="off"></textarea>
+                                <small class="text-danger" *ngIf="submitted && form.get('title').hasError('required')">Content required</small>
+                            </div>
+
+                        </div>    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                        <button type="button" (click)='update()' class="btn btn-warning font-weight-bold" *ngIf="isEdit">Update</button>
+                        <button type="button" (click)='insert()' class="btn btn-primary font-weight-bold" *ngIf="!isEdit">Insert</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+
+<!--Confirm Modal-->
+<div class="modal fade" id="confrimDialog" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confrimDialog">Delete Article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to  delete <br/>
+                    <span class="text-primary">{{selectedArticle.title}} ?</span>
+                </h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-success font-weight-bold" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal" (click)="deleteArticle()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

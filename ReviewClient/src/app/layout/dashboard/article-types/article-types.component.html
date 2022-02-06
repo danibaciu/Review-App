@@ -1,0 +1,86 @@
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class="container pb-5">
+        <div class="row flex-center">
+            <div class="col-md-12">
+                <div class="card card-custom gutter-b example example-compact">
+                    <div class="card-header">
+                        <h3 class="card-title">Article Types</h3>
+                        <div class="row float-right">
+                            <div class="col-12">
+                                <button class="mt-4 btn btn-xs btn-success float-right" data-toggle="modal" data-target="#insertDialog">Add New</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th>Actions</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let type of types | paginate:{ itemsPerPage: 10, currentPage: page }">
+                                    <th scope="row">{{type.id}}</th>
+                                    <td>{{type.tag}}</td>
+                                    <td>
+                                        <button class="btn btn-md btn-danger" (click)='deleteType(type)'>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+    <!--end::Container-->
+</div>
+
+
+<!--Confirm Modal-->
+<div class="modal fade" id="insertDialog" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="insertDialog">Insert Article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <form [formGroup]="form">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" formControlName="tag" placeholder="Type name...">
+                            <small class="text-danger" *ngIf='submitted && form.get("tag").hasError("required")'>Name required</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-warning font-weight-bold" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success font-weight-bold" (click)="insertNewTag()">Insert</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

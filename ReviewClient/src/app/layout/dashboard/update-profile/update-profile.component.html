@@ -1,0 +1,107 @@
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 flex-center">
+                <div class="card card-custom gutter-b example example-compact">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Primary Data</h3>
+                    </div>
+                    <!--begin::Form-->
+                    <form [formGroup]="user">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Email address
+                                <span class="text-danger">*</span></label>
+                                <input type="email" formControlName="email" class="form-control" placeholder="Enter email">
+                                <small class="text-danger" *ngIf="userSubmitted && user.get('email').hasError('required')">Email required</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password
+                                <span class="text-danger">*</span></label>
+                                <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <small class="text-danger" *ngIf="userSubmitted && user.get('password').hasError('required')">Password required</small>
+                            </div>
+                            
+                            <!--end: Code-->
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="updateUser()" class="btn btn-warning mr-2">Update</button>
+                        </div>
+                    </form>
+                    <!--end::Form-->
+                </div>
+            </div>
+            <div class="col-md-4 flex-center">
+                <div class="card card-custom gutter-b example example-compact">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Profile</h3>
+                    </div>
+                    <!--begin::Form-->
+                    <form [formGroup]="profile">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Display Name
+                                <span class="text-danger">*</span></label>
+                                <input type="text" formControlName="displayName" class="form-control" placeholder="Enter Name">
+                                <small class="text-danger" *ngIf="profileSubmitted && profile.get('displayName').hasError('required')">Name required</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Age
+                                <span class="text-danger">*</span></label>
+                                <input type="number" formControlName="age" class="form-control" id="exampleInputPassword1" placeholder="Age">
+                                <small class="text-danger" *ngIf="profileSubmitted && profile.get('age').hasError('required')">Age required</small>
+                            </div>
+                            
+                            <!--end: Code-->
+                        </div>
+                        <div class="card-footer">
+                            <button (click)='updateProfile()' class="btn btn-warning mr-2">Update</button>
+                        </div>
+                    </form>
+                    <!--end::Form-->
+                </div>
+            </div>
+            <div class="col-md-4 flex-center">
+                <div class="card card-custom gutter-b example example-compact">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Preferences</h3>
+                    </div>
+                    <!--begin::Form-->
+                    <form [formGroup]="preference">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Dark Mode</label>
+                                <div class="col-3">
+                                 <span class="switch switch-success">
+                                  <label>
+                                   <input type="checkbox" formControlName="darkMode" checked="checked" name="select"/>
+                                   <span></span>
+                                  </label>
+                                 </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                    <label class="col-3 col-form-label">GdPR Acceptance</label>
+                                    <div class="col-3">
+                                    <span class="switch switch-success">
+                                        <label>
+                                        <input type="checkbox" formControlName="gdpr_acceptance" checked="checked" name="select"/>
+                                        <span></span>
+                                        </label>
+                                    </span>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)='updatePreference()' class="btn btn-warning mr-2">Update</button>
+                        </div>
+                    </form>
+                    <!--end::Form-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Container-->
+</div>

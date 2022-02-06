@@ -1,0 +1,53 @@
+﻿<Properties StartupConfiguration="{7CF94AD9-0231-4EC2-B1EB-67DCCD3AA26F}|Default">
+  <MonoDevelop.Ide.ItemProperties.ReviewApp PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Core/Services/ArticleService.cs">
+    <Files>
+      <File FileName="ReviewApp/Controllers/Api/ArticleTypeController.cs" Line="43" Column="1" />
+      <File FileName="ReviewApp/Controllers/Api/ArticleController.cs" Line="51" Column="49" />
+      <File FileName="Models/Request/Article/ArticleRequest.cs" Line="10" Column="27" />
+      <File FileName="Core/Services/ArticleService.cs" Line="214" Column="46" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowVersionControlOverlays" value="False" />
+          <Node name="ReviewApp" expanded="True">
+            <Node name="Core" expanded="True">
+              <Node name="Services" expanded="True">
+                <Node name="ArticleService.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="Models" expanded="True">
+              <Node name="Request" expanded="True">
+                <Node name="Article" expanded="True" />
+                <Node name="Auth" expanded="True" />
+                <Node name="Comment" expanded="True" />
+                <Node name="Preference" expanded="True" />
+                <Node name="Profile" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="ReviewApp" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="Api" expanded="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="wwwroot" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/eapplestore/Projects/Fiverr/Tudor/ReviewApp/ReviewApp/Controllers/Api/ValuesController.cs" relfile="ReviewApp/Controllers/Api/ValuesController.cs" line="37" column="1" />
+      <Breakpoint file="/Users/eapplestore/Projects/Fiverr/Tudor/ReviewApp/ReviewApp/Controllers/Api/ValuesController.cs" relfile="ReviewApp/Controllers/Api/ValuesController.cs" line="30" column="1" />
+      <Breakpoint file="/Users/eapplestore/Projects/Fiverr/Tudor/ReviewApp/ReviewApp/Controllers/Api/ValuesController.cs" relfile="ReviewApp/Controllers/Api/ValuesController.cs" line="31" column="1" />
+      <Breakpoint file="/Users/eapplestore/Projects/Fiverr/Tudor/ReviewApp/ReviewApp/Controllers/Api/UserController.cs" relfile="ReviewApp/Controllers/Api/UserController.cs" line="28" column="1" />
+      <Breakpoint file="/Users/eapplestore/Projects/Fiverr/Tudor/ReviewApp/ReviewApp/Controllers/Api/ArticleTypeController.cs" relfile="ReviewApp/Controllers/Api/ArticleTypeController.cs" line="43" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

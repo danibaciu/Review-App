@@ -1,0 +1,67 @@
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class="container pb-5">
+        <div class="row flex-center">
+            <div class="col-md-12">
+                <div class="card card-custom gutter-b example example-compact">
+                    <div class="card-header">
+                        <h3 class="card-title">Writter :&nbsp; <span class="text-success"> {{article.writterName}}</span></h3>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row flex-center">
+                            <div class="col-6">
+                                <b>{{article.title}}</b>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-right text-primary">#{{article.articleTag}}</h6>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="paragraphs">{{article.content}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <form [formGroup]="form">
+                            <div class="row">
+                                <div class="form-group col-8">
+                                    <input placeholder="Comment here...." type="text" formControlName="text" autocomplete="off"  class="form-control">
+                                    <span class="form-text text-muted">Comments will be public..</span>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-sm btn-light-success" (click)="insertComment()" [disabled]="submitted &&(form.get('text').hasError('required'))">Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-12 form-group" *ngFor="let comment of comments | paginate: { itemsPerPage: 6, currentPage: page }">
+                                <div class="form-control high-height">
+                                    <p>{{comment.text}}</p>
+                                    
+                                    <span class="float-right text-primary">By {{comment.displayName}}</span>
+                                </div>
+                                <!-- <hr> -->
+                                <!-- <p class="text-right ">By {{comment.displayName}}</p> -->
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+    <!--end::Container-->
+</div>
